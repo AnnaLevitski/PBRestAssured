@@ -1,4 +1,4 @@
-package DTOforOKhttp;
+package DTO;
 
 import lombok.Builder;
 import lombok.Getter;

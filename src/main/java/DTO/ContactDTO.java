@@ -1,9 +1,6 @@
-package DTOforOKhttp;
+package DTO;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 //{
 //        "contacts": [
@@ -22,6 +19,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class ContactDTO {
     private String id;
     private String name;

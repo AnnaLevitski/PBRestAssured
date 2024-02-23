@@ -4,7 +4,7 @@
     <parameter name="name" value="login__testing.xml"/>
     <test name="login">
         <classes>
-            <class name="tests.LoginPageTest"/>
+            <class name="restAssured.LoginTests"/>
         </classes>
     </test>
 </suite>

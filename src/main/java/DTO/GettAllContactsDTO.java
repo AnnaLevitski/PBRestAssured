@@ -1,15 +1,15 @@
-package DTOforOKhttp;
+package DTO;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 @Getter
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class GettAllContactsDTO {
     private List<ContactDTO> contacts;
 }

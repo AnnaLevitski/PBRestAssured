@@ -1,4 +1,4 @@
-package DTOforOKhttp;
+package DTO;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class ResponseMessageDTO {
+public class DeleteByIDResponceMessageDTO {
     private String message;
 }
+

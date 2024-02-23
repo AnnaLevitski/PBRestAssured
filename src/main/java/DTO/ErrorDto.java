@@ -1,15 +1,16 @@
-package DTOforOKhttp;
+package DTO;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class ErrorDto {
+    private String timestamp;
     private int status;
     private String error;
     private String path;
