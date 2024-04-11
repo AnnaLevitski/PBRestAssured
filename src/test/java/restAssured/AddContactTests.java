@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 
 public class AddContactTests extends ContactController {
-    @Test(invocationCount = 1)
+    @Test(invocationCount = 10)
     public void addContact_success(){
         ContactDTO contactDTO = ContactDTO.builder().id("dsf").name("Sara"+randomInt()).lastName("J"+randomInt()).phone("12345678"+randomInt()+"").email("sara"+randomInt()+"@gmail.com").address("NY "+randomInt()).description("ffd").build();
         Assert.assertEquals(statusCodeAddContact(contactDTO, urlContact), 200);
