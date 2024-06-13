@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="api" verbose="1">
+    <test name="api">
+        <classes>
+            <class name="com.api.RegistrationTests"/>
+            <class name="com.api.LoginTests"/>
+            <class name="com.api.AddContactTests"/>
+            <class name="com.api.GetAllContactsTests"/>
+        </classes>
+    </test>
+</suite>

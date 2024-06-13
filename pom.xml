@@ -32,8 +32,8 @@
                     <configuration>
                         <testFailureIgnore>true</testFailureIgnore>
                         <suiteXmlFiles>
-                            <suiteXmlFile>src/test/resources/testing.xml</suiteXmlFile>
-                            <suiteXmlFile>src/test/resources/browsers_test.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resources/api.xml</suiteXmlFile>
+                            <suiteXmlFile>src/test/resources/ui.xml</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
