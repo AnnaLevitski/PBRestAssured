@@ -5,6 +5,7 @@ Options run locally restAssured tests:
 ### `mvn test -DsuiteXmlFile=src/test/resources/api.xml`
 
 Options run locally ui tests:
+### `mvn test -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=M_S`
 ### `mvn test -Dbrowser=firefox -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=D_S`
 ### `mvn test -Dbrowser=MicrosoftEdge -DsuiteXmlFile=src/test/resources/ui.xml`
 ### `mvn test -Dbrowser=safari -DsuiteXmlFile=src/test/resources/ui.xml`
