@@ -11,46 +11,51 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.List;
 
+import static com.api.Token.getCurrentToken;
+import static com.core.utils.Constants.URL_API;
 import static io.restassured.RestAssured.given;
 
-public class ContactController extends BaseApi{
+public class ContactController {
+    static String urlContact = "v1/contacts";
     RequestSpecification requestSpecification;
-    public static String token;
+
     @BeforeSuite
     public void bs(){
-         token = getTokenAuth();
+
         requestSpecification = new RequestSpecBuilder()
-                .addHeader("Authorization",token)
+                .addHeader("Authorization",getCurrentToken())
                 .setContentType(ContentType.JSON)
                 .build();
     }
-    public static String urlContact = "v1/contacts";
-    private Response addContact(ContactDTO contactDTO, String url){
+    private Response addContact(ContactDTO contactDTO){
         return given()
                 .spec(requestSpecification)
                 .body(contactDTO)
                 .when()
-                .post(baseURL+url)
+                .post(URL_API+urlContact)
                 .thenReturn();
     }
-    private Response getAllContacts(String url){
+    private Response getAllContacts(){
         return given()
                 .spec(requestSpecification)
                 .when()
-                .get(baseURL+url)
+                .get(URL_API+urlContact)
                 .thenReturn();
     }
-    public List<ContactDTO> getAllContactsList(String url){
-        return getAllContacts(url).getBody().as(GettAllContactsDTO.class).getContacts();
+    public List<ContactDTO> getAllContactsList(){
+        return getAllContacts().getBody().as(GettAllContactsDTO.class).getContacts();
     }
-    public int statusCodeAddContact(ContactDTO contactDTO, String url){
-        return addContact(contactDTO,url).statusCode();
+    public int statusCodeAddContact(ContactDTO contactDTO){
+        return addContact(contactDTO).statusCode();
     }
-    public int statusCodeGetAllContacts(String url){
-        return getAllContacts(url).statusCode();
+    public int statusCodeGetAllContacts(){
+        return getAllContacts().statusCode();
     }
-    public String getMessageContact(ContactDTO contactDTO, String url){
-        return String.valueOf(addContact(contactDTO,url).getBody().as(ErrorDto.class).getMessage());
+    public String getMessageContact(ContactDTO contactDTO){
+        return addContact(contactDTO).getBody().toString().split("@")[1];
+    }
+    public String getErrorMessageContact(ContactDTO contactDTO){
+        return String.valueOf(addContact(contactDTO).getBody().as(ErrorDto.class).getMessage());
     }
 
 }

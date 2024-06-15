@@ -31,7 +31,7 @@ public class ScreenProvider {
             case "mob_s" :
             case "m_s":
             case "M_S":
-                return ScreenSize.MOBILE_S;
+                return ScreenSize.MOBILE_M;
             case "TABLET":
             case "tab" :
             case "t":

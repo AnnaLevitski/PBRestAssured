@@ -6,6 +6,8 @@ Options run locally restAssured tests:
 
 Options run locally ui tests:
 ### `mvn test -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=M_S`
+### `mvn test -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=T`
+### `mvn test -Dbrowser=chrome -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=M_M`
 ### `mvn test -Dbrowser=firefox -DsuiteXmlFile=src/test/resources/ui.xml  -Dscreen=D_S`
 ### `mvn test -Dbrowser=MicrosoftEdge -DsuiteXmlFile=src/test/resources/ui.xml`
 ### `mvn test -Dbrowser=safari -DsuiteXmlFile=src/test/resources/ui.xml`
@@ -18,3 +20,4 @@ DESKTOP_S(1280 x 720),
 MOBILE_M(414 x 896),
 MOBILE_S(360 x 800),
 TABLET(768 x 1024);
+

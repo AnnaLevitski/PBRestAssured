@@ -1,5 +1,6 @@
 package com.api;
 
+import com.core.listeners.RetryAnalyzer;
 import com.core.models.dto.AuthRequestDTO;
 import com.core.models.dto.AuthResponceDTO;
 import com.core.models.dto.ErrorDto;
@@ -8,54 +9,38 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.core.providers.TestDataGenerator.*;
+import static com.core.utils.Constants.PASSWORD;
+import static com.core.utils.Constants.USER_NAME;
 import static io.restassured.RestAssured.given;
 
 
 public class LoginTests extends AuthController {
-    @BeforeClass
-    @SuppressWarnings("unchecked")
-    public void preConditions(){
-        try {
-            RestAssured.baseURI = "https://contactapp-telran-backend.herokuapp.com/";
-            RestAssured.basePath = "v1";
-        }catch (Exception ignored){
 
-        }
-
-    }
-    @Test
+    @Test(invocationCount = 3, retryAnalyzer = RetryAnalyzer.class)
     public void login_success(){
-        AuthRequestDTO auth = AuthRequestDTO.builder().username("mara@gmail.com").password("Mmar123456$").build();
-        AuthResponceDTO authResponceDTO = given().body(auth)
-                .contentType("application/json")
-                .when()
-                .post("/user/login/usernamepassword")
-                .then()
-                .assertThat().statusCode(200)
-                .extract().response().as(AuthResponceDTO.class);
-        System.out.println(authResponceDTO.getToken());
-    }
-    @Test
-    public void login_successApi(){
-        AuthRequestDTO auth = AuthRequestDTO.builder().username("mara@gmail.com").password("Mmar123456$").build();
+        AuthRequestDTO auth = AuthRequestDTO.builder().username(USER_NAME).password(PASSWORD).build();
         Assert.assertEquals(statusCodeAuth(auth, urlLogin), 200);
     }
-    @Test
-    public void login_negativePassvordApi(){
-        AuthRequestDTO auth = AuthRequestDTO.builder().username("mara@gmail.com").password("mar123456$").build();
+    @Test(invocationCount = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void login_negativePassvordWrong(){
+        AuthRequestDTO auth = AuthRequestDTO.builder().username(USER_NAME).password(randomPasswordWrong()).build();
         Assert.assertEquals(statusCodeAuth(auth, urlLogin), 401);
     }
-    @Test
-    public void login_negativeLogin(){
-        AuthRequestDTO auth = AuthRequestDTO.builder().username("maragmail.com").password("Mmar123456$").build();
-        ErrorDto errorDto = given().body(auth)
-                .contentType("application/json")
-                .when()
-                .post("/user/login/usernamepassword")
-                .then()
-                .assertThat().statusCode(401)
-                .extract().response().as(ErrorDto.class);
-        System.out.println(errorDto.getError());
-
+    @Test(invocationCount = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void login_negativePassvord(){
+        AuthRequestDTO auth = AuthRequestDTO.builder().username(USER_NAME).password(randomPassword()).build();
+        Assert.assertEquals(statusCodeAuth(auth, urlLogin), 401);
     }
+    @Test(invocationCount = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void login_negativeEmail(){
+        AuthRequestDTO auth = AuthRequestDTO.builder().username(randomEmail()).password(PASSWORD).build();
+        Assert.assertEquals(statusCodeAuth(auth, urlLogin), 401);
+    }
+    @Test(invocationCount = 5, retryAnalyzer = RetryAnalyzer.class)
+    public void login_negativeEmailWrong(){
+        AuthRequestDTO auth = AuthRequestDTO.builder().username(randomEmailWrong()).password(PASSWORD).build();
+        Assert.assertEquals(statusCodeAuth(auth, urlLogin), 401);
+    }
+
 }
